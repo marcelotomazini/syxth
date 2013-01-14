@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/dead_code_search_feature_0.0.4.jar" id="dead_code_search_feature" version="0.0.4">
+      <category name="dead_code_search_category"/>
+   </feature>
+   <category-def name="dead_code_search_category" label="Dead code search category"/>
+</site>
