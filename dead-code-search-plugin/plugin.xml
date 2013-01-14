@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:org.eclipse.ui.popup.any?before=additions">
+          	<command
+                 commandId="dead-code-search"
+                 icon="icons/objectivelogo.gif"
+                 label="Search for dead code">
+                 
+                 <!--<visibleWhen>
+                	<with variable="activeMenuSelection">
+                    	<iterate>
+                        	<adapt type="org.eclipse.jdt.core.IPackageFragment"></adapt>
+                    	</iterate>
+                	</with>
+            	</visibleWhen>-->
+          	</command>
+		</menuContribution>		
+	</extension>
+	
+	<extension point="org.eclipse.ui.commands">
+     	<command name="Search for dead code"
+            id="dead-code-search"
+            defaultHandler="com.objective.deadcodesearch.popup.handlers.ShowViewHandler">
+     	</command>
+   	</extension>
+	
+   <extension point="org.eclipse.ui.views">
+      <category name="Dead code search" id="dead-code-search"></category>
+      <view name="Dead code search"
+            icon="icons/objectivelogo.gif"
+            category="dead-code-search"
+            class="com.objective.deadcodesearch.views.DeadCodeSearchView"
+            id="com.objective.deadcodesearch.views.DeadCodeSearchView">
+      </view>
+   </extension>
+   <extension point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension targetID="org.eclipse.jdt.ui.JavaPerspective">
+         <view ratio="0.5"
+               relative="org.eclipse.ui.views.ProblemView"
+               relationship="right"
+               id="com.objective.deadcodesearch.views.DeadCodeSearchView">
+         </view>
+      </perspectiveExtension>
+   </extension>
+
+</plugin>
