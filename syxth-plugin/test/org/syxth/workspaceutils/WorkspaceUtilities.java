@@ -41,7 +41,7 @@ import org.eclipse.core.runtime.Status;
 
 public class WorkspaceUtilities {
 	
-	private static final String PLUGIN_ID = "dead-code-search";
+	private static final String PLUGIN_ID = "syxth";
 	public static final String DEFAULT_CHARSET = "utf-8";
 	
 	public static void addProjectReference(IProject referent, IProject reference,

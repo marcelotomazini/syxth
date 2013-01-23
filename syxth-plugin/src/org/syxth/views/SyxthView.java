@@ -21,7 +21,7 @@ import org.syxth.ReferencesAnalyser;
 @SuppressWarnings("restriction")
 public class SyxthView extends SearchView {
 	
-	public static final String SEARCH_VIEW_ID = "com.objective.deadcodesearch.views.DeadCodeSearchView";
+	public static final String SEARCH_VIEW_ID = "org.syxth.views.SyxthView";
 	
 	private SearchJob searchJob;
 
