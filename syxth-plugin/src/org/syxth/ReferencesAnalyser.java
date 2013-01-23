@@ -1,4 +1,4 @@
-package com.objective.deadcodesearch;
+package org.syxth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +27,9 @@ import org.eclipse.jdt.internal.ui.search.JavaSearchScopeFactory;
 import org.eclipse.search.internal.ui.text.FileSearchResult;
 import org.eclipse.search.ui.ISearchQuery;
 import org.eclipse.search.ui.text.Match;
+import org.syxth.queries.DeadCodeJavaSearchQuery;
+import org.syxth.queries.DeadCodeSearchQueryProvider;
 
-import com.objective.deadcodesearch.queries.DeadCodeJavaSearchQuery;
-import com.objective.deadcodesearch.queries.DeadCodeSearchQueryProvider;
 
 @SuppressWarnings("restriction")
 public class ReferencesAnalyser {

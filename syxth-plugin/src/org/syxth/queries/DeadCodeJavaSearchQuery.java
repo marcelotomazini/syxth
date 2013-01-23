@@ -1,4 +1,4 @@
-package com.objective.deadcodesearch.queries;
+package org.syxth.queries;
 
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.internal.ui.search.JavaSearchQuery;

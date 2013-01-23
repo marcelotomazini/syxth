@@ -1,4 +1,4 @@
-package com.objective.deadcodesearch.queries;
+package org.syxth.queries;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.search.internal.ui.text.FileSearchQuery;

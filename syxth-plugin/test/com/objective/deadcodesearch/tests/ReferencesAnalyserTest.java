@@ -17,8 +17,8 @@ import org.eclipse.jdt.internal.ui.search.JavaSearchResult;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.syxth.ReferencesAnalyser;
 
-import com.objective.deadcodesearch.ReferencesAnalyser;
 import com.objective.deadcodesearch.workspaceutils.JavaProject;
 
 

@@ -1,4 +1,4 @@
-package com.objective.deadcodesearch.views;
+package org.syxth.views;
 
 import java.util.List;
 
@@ -14,12 +14,12 @@ import org.eclipse.search.ui.text.Match;
 import org.eclipse.search2.internal.ui.SearchView;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.progress.UIJob;
+import org.syxth.ReferencesAnalyser;
 
-import com.objective.deadcodesearch.ReferencesAnalyser;
 
 
 @SuppressWarnings("restriction")
-public class DeadCodeSearchView extends SearchView {
+public class SyxthView extends SearchView {
 	
 	public static final String SEARCH_VIEW_ID = "com.objective.deadcodesearch.views.DeadCodeSearchView";
 	

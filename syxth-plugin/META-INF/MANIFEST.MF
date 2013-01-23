@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Dead code search
-Bundle-SymbolicName: dead-code-search;singleton:=true
-Bundle-Version: 0.0.4
+Bundle-Name: Syxth
+Bundle-SymbolicName: syxth;singleton:=true
+Bundle-Version: 0.0.1
 Require-Bundle: org.eclipse.ui,
  org.eclipse.jdt,
  org.eclipse.jdt.core,

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="dead_code_search_feature"
-      label="Dead code search"
-      version="0.0.4"
+      id="syxth_feature"
+      label="Syxth"
+      version="0.0.1"
       provider-name="Objective Solutions">
 
-   <description url="http://www.objective.com.br/plugins">
-      Dead code search
+   <description url="http://syxth.org">
+      Syxth
    </description>
 
    <copyright>
@@ -239,7 +239,7 @@ POSSIBILITY OF SUCH DAMAGES.
    </license>
 
    <url>
-      <update label="Objective Update Site" url="http://localhost/updatesite/"/>
+      <update label="Syxth Update Site" url="http://syxth.org/updatesite/"/>
    </url>
 
    <requires>
@@ -253,9 +253,6 @@ POSSIBILITY OF SUCH DAMAGES.
       <import plugin="org.eclipse.search"/>
    </requires>
 
-   <plugin id="dead-code-search"
-         download-size="0"
-         install-size="0"
-         version="0.0.4"/>
+   <plugin id="syxth" download-size="0" install-size="0" version="0.0.1"/>
 
 </feature>
