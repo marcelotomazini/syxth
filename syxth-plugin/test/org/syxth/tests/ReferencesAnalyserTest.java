@@ -1,4 +1,4 @@
-package com.objective.deadcodesearch.tests;
+package org.syxth.tests;
 
 import static org.junit.Assert.fail;
 
@@ -18,8 +18,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.syxth.ReferencesAnalyser;
+import org.syxth.workspaceutils.JavaProject;
 
-import com.objective.deadcodesearch.workspaceutils.JavaProject;
 
 
 
