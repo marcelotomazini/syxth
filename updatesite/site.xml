@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/syxth_feature_0.0.1.jar" id="syxth_feature" version="0.0.1">
+   <feature url="features/syxth_feature_0.0.2.jar" id="syxth_feature" version="0.0.2">
       <category name="syxth_category"/>
    </feature>
    <category-def name="syxth_category" label="Syxth Category"/>
