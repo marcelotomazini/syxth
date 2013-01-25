@@ -1,8 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Syxth
+Bundle-Name: Syxth Plug-in
 Bundle-SymbolicName: syxth;singleton:=true
-Bundle-Version: 0.0.1
+Bundle-Version: 0.0.2
+Bundle-Activator: org.syxth.SyxthPlugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.jdt,
  org.eclipse.jdt.core,

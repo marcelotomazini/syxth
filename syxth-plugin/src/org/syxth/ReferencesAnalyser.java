@@ -92,11 +92,15 @@ public class ReferencesAnalyser {
 	private List<Match> performSearch(ICompilationUnit compilationUnit) throws CoreException {
 		List<Match> matches = new ArrayList<Match>();
 		IType type = compilationUnit.getAllTypes()[0];
-		for (IMethod method : type.getMethods())
+		for (IMethod method : type.getMethods()) {
+			if (ExclusionPatterns.ignoreMethod(method))
+				continue;
+			
 			if (!hasReference(method) && !hasStringReference(method)) {
 				ISourceRange nameRange = method.getNameRange();
 				matches.add(new Match(method, nameRange.getOffset(), nameRange.getLength()));
 			}
+		}
 		return matches;
 	}
 	
@@ -109,9 +113,8 @@ public class ReferencesAnalyser {
 
 	private List<Match> performSearch(IPackageFragment packageFragment) throws CoreException {
 		List<Match> matches = new ArrayList<Match>();
-		for (ICompilationUnit compilationUnit : packageFragment.getCompilationUnits())
-			matches.addAll(performSearch(compilationUnit));
-		for (IPackageFragment subPackage : getSubpackages(packageFragment))
+
+		for (IPackageFragment subPackage : withSubpackages(packageFragment))
 			for (ICompilationUnit compilationUnit : subPackage.getCompilationUnits())
 				matches.addAll(performSearch(compilationUnit));
 		
@@ -137,24 +140,13 @@ public class ReferencesAnalyser {
 		return false;
 	}
 	
-	private List<IPackageFragment> getSubpackages(IPackageFragment packageFragment) throws JavaModelException {
-		List<IPackageFragment> subPackages = new ArrayList<IPackageFragment>();
+	private List<IPackageFragment> withSubpackages(IPackageFragment packge) throws JavaModelException {
+		IJavaElement[] allPackages = ((IPackageFragmentRoot)packge.getParent()).getChildren();
+		List<IPackageFragment> ret = new ArrayList<IPackageFragment>();
+		for (IJavaElement candidate : allPackages)
+			if (candidate.getElementName().startsWith(packge.getElementName()))
+				ret.add((IPackageFragment)candidate);
 		
-		IJavaElement[] packages = ((IPackageFragmentRoot)packageFragment.getParent()).getChildren();
-		String[] names = packageFragment.getElementName().split("\\.");
-		int namesLength = names.length;
-		for (int i= 0; i < packages.length; i++) {
-			String[] otherNames = ((IPackageFragment) packages[i]).getElementName().split("\\.");
-			if (otherNames.length <= namesLength) 
-				continue;
-			
-			for (int j = 0; j < namesLength; j++)
-				if (names[j].equals(otherNames[j])) {
-					subPackages.add((IPackageFragment)packages[i]);
-					break;
-				}
-		}
-		
-		return subPackages;
+		return ret;
 	}
 }

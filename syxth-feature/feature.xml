@@ -2,7 +2,7 @@
 <feature
       id="syxth_feature"
       label="Syxth"
-      version="0.0.1"
+      version="0.0.2"
       provider-name="Objective Solutions">
 
    <description url="http://syxth.org">
@@ -253,6 +253,6 @@ POSSIBILITY OF SUCH DAMAGES.
       <import plugin="org.eclipse.search"/>
    </requires>
 
-   <plugin id="syxth" download-size="0" install-size="0" version="0.0.1"/>
+   <plugin id="syxth" download-size="0" install-size="0" version="0.0.2"/>
 
 </feature>

@@ -20,9 +20,6 @@ import org.junit.Test;
 import org.syxth.ReferencesAnalyser;
 import org.syxth.workspaceutils.JavaProject;
 
-
-
-
 @SuppressWarnings("restriction")
 public class ReferencesAnalyserTest {
 
@@ -48,7 +45,7 @@ public class ReferencesAnalyserTest {
 	public void methodWithoutReference() throws Exception {
 		StringBuilder classA = new StringBuilder();
 		classA.append("class A { }");
-
+		
 		StringBuilder classB = new StringBuilder();
 		classB.append("class B {" + newLine);
 		classB.append("void foo() { }" + newLine);
@@ -57,7 +54,7 @@ public class ReferencesAnalyserTest {
 		subject = searchMethodsReferencesFor(classA.toString(), classB.toString());
 		assertSubjectContains(subject.getElements(), Arrays.asList("foo"));
 	}
-	
+
 	@Test
 	public void regExMethodSignature() throws Exception {
 		StringBuilder classA = new StringBuilder();
@@ -74,7 +71,6 @@ public class ReferencesAnalyserTest {
 		classB.append("}");
 
 		subject = searchMethodsReferencesFor(classA.toString(), classB.toString());
-
 		assertSubjectContains(subject.getElements(), Arrays.asList("a", "b", "c", "d", "e", "f"));
 	}
 	
@@ -281,6 +277,21 @@ public class ReferencesAnalyserTest {
 		assertSubjectContains(subject.getElements(), Arrays.asList("foo"));
 	}
 
+	@Test
+	public void methodWithoutReferenceWithTestAnnotation() throws Exception {
+		StringBuilder classA = new StringBuilder();
+		classA.append("class A { }");
+
+		StringBuilder classB = new StringBuilder();
+		classB.append("class B {" + newLine);
+		classB.append("public @interface Test {}" + newLine);
+		classB.append("@Test void foo() { }" + newLine);
+		classB.append("}");
+		
+		subject = searchMethodsReferencesFor(classA.toString(), classB.toString());
+		assertEmptySubject(subject.getElements());
+	}
+	
 	private void assertEmptySubject(Object[] actual) {
 		assertSubjectContains(actual, new ArrayList<String>());
 	}

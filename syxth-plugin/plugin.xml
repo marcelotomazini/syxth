@@ -35,7 +35,7 @@
             id="org.syxth.views.SyxthView">
       </view>
    </extension>
-   <extension point="org.eclipse.ui.perspectiveExtensions">
+	<extension point="org.eclipse.ui.perspectiveExtensions">
       <perspectiveExtension targetID="org.eclipse.jdt.ui.JavaPerspective">
          <view ratio="0.5"
                relative="org.eclipse.ui.views.ProblemView"
@@ -44,5 +44,13 @@
          </view>
       </perspectiveExtension>
    </extension>
+   
+	<extension point="org.eclipse.ui.preferencePages">
+    	<page class="org.syxth.preferences.SyxthPreferencePage" id="org.syxth.preferences.SyxthPreferencePage" name="Syxth"/>
+   	</extension>
+   	
+   	<extension point="org.eclipse.core.runtime.preferences">
+      	<initializer class="org.syxth.preferences.PreferenceInitializer"/>
+   	</extension>
 
 </plugin>
