@@ -291,6 +291,20 @@ public class ReferencesAnalyserTest {
 		subject = searchMethodsReferencesFor(classA.toString(), classB.toString());
 		assertEmptySubject(subject.getElements());
 	}
+
+	@Test
+	public void ignoredMethod() throws Exception {
+		StringBuilder classA = new StringBuilder();
+		classA.append("class A { }");
+		
+		StringBuilder classB = new StringBuilder();
+		classB.append("class B {" + newLine);
+		classB.append("void main() { }" + newLine);
+		classB.append("}");
+		
+		subject = searchMethodsReferencesFor(classA.toString(), classB.toString());
+		assertEmptySubject(subject.getElements());
+	}
 	
 	private void assertEmptySubject(Object[] actual) {
 		assertSubjectContains(actual, new ArrayList<String>());

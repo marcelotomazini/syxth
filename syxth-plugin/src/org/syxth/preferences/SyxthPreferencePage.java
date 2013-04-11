@@ -15,6 +15,7 @@ public class SyxthPreferencePage extends FieldEditorPreferencePage implements IW
 	@Override
 	public void createFieldEditors() {
 		addField(new AnnotationExcludeListEditor(PreferenceConstants.P_ANNOTATION_EXCLUDES, "&Exclude from search the methods annotated with:", getFieldEditorParent()));		
+		addField(new MethodExcludeListEditor(PreferenceConstants.P_METHOD_NAME_EXCLUDES, "&Exclude from search the methods named with:", getFieldEditorParent()));		
 	}
 
 	@Override

@@ -13,6 +13,10 @@ public class ExclusionPatterns {
 
 	public static boolean ignoreMethod(IMethod method) {
 		try {
+			for (String excludedMethod : getExcludeMethods())
+				if(method.getElementName().equals(excludedMethod))
+					return true;
+			
 			List<String> excludedAnnotations = getExcludedAnnotations();
 			for (IAnnotation annotation : method.getAnnotations())
 				if(excludedAnnotations.contains(annotation.getElementName()))
@@ -25,6 +29,10 @@ public class ExclusionPatterns {
 	
 	static private List<String> getExcludedAnnotations() {
 		return Arrays.asList(SyxthPlugin.getDefault().getPreferenceStore().getString(PreferenceConstants.P_ANNOTATION_EXCLUDES).split("\\s+"));
+	}
+	
+	static private List<String> getExcludeMethods() {
+		return Arrays.asList(SyxthPlugin.getDefault().getPreferenceStore().getString(PreferenceConstants.P_METHOD_NAME_EXCLUDES).split("\\s+"));
 	}
 
 }

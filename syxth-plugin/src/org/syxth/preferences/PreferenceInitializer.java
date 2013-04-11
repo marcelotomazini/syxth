@@ -10,6 +10,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = SyxthPlugin.getDefault().getPreferenceStore();
 		store.setDefault(PreferenceConstants.P_ANNOTATION_EXCLUDES, "Test\nAfter\nBefore");
+		store.setDefault(PreferenceConstants.P_METHOD_NAME_EXCLUDES, "main");
 	}
 
 }
