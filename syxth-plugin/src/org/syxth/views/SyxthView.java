@@ -23,8 +23,6 @@ public class SyxthView extends SearchView {
 	
 	public static final String SEARCH_VIEW_ID = "org.syxth.views.SyxthView";
 	
-	private SearchJob searchJob;
-
 	public void showSearchResult(ISelection selection) {
 		showSearchResult(asJavaElement(selection));
 	}
@@ -41,8 +39,6 @@ public class SyxthView extends SearchView {
 			try {
 				List<Match> matches = r.searchMatches();
 				javaSearchResult.addMatches((Match[]) matches.toArray(new Match[matches.size()]));
-				
-				searchJob.schedule();
 			} catch (Exception x) {
 				return UIJob.errorStatus(x);
 			}
@@ -63,7 +59,7 @@ public class SyxthView extends SearchView {
 	@Override
 	public void createPartControl(Composite parent) {
 		super.createPartControl(parent);
-		searchJob = new SearchJob(parent);
+		new SearchJob(parent);
 	}
 		
 	private final class SearchJob extends UIJob {

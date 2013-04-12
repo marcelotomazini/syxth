@@ -129,8 +129,8 @@ public class ReferencesAnalyser {
 		DeadCodeSearchQueryProvider provider = new DeadCodeSearchQueryProvider();
 		
 		String searchForRegex = "(\\W|^)\"" + method.getElementName() + "(\\W|$)";
-		ISearchQuery query = isProtected(method) ? provider.createQuery(searchForRegex, true, method.getResource()) : 
-								provider.createQuery(searchForRegex, true);
+		ISearchQuery query = isProtected(method) ? provider.createQuery(searchForRegex, method.getResource()) : 
+								provider.createQuery(searchForRegex);
 		query.run(null);
 		FileSearchResult searchResult = (FileSearchResult) query.getSearchResult();
 		

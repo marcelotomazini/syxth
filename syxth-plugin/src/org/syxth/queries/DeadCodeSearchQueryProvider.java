@@ -9,14 +9,14 @@ import org.eclipse.search2.internal.ui.text2.DefaultTextSearchQueryProvider;
 @SuppressWarnings("restriction")
 public class DeadCodeSearchQueryProvider extends DefaultTextSearchQueryProvider {
 
-	public ISearchQuery createQuery(String searchForString, boolean isRegEx) {
+	public ISearchQuery createQuery(String searchForString) {
 		FileTextSearchScope scope = FileTextSearchScope.newWorkspaceScope(getFileNamePatterns(), true);
-		return new FileSearchQuery(searchForString, isRegEx, true, scope);
+		return new FileSearchQuery(searchForString, true, true, scope);
 	}
 
-	public ISearchQuery createQuery(String searchForString, boolean isRegEx, IResource resource) {
+	public ISearchQuery createQuery(String searchForString, IResource resource) {
 		FileTextSearchScope scope = FileTextSearchScope.newSearchScope(new IResource[] { resource }, getFileNamePatterns(), true);
-		return new FileSearchQuery(searchForString, isRegEx, true, scope);
+		return new FileSearchQuery(searchForString, true, true, scope);
 	}
 	
 	private String[] getFileNamePatterns() {
