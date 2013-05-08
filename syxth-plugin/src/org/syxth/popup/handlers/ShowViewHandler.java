@@ -32,7 +32,6 @@ public class ShowViewHandler extends AbstractHandler implements IHandler {
 		} catch (PartInitException e) {
 			throw new IllegalStateException(e);
 		}
-
 		activePage.activate(result);
 		return result;
 	}
