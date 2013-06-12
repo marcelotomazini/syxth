@@ -29,7 +29,7 @@ public class ReferencesAnalyserTest {
 	
 	public static final String newLine = System.getProperty("line.separator");
 	
-	@Before public void beforeReferencesAnalysisTest() throws Exception { project = new JavaProject();}
+	@Before public void beforeReferencesAnalysisTest() throws Exception { project = new JavaProject(); }
 	@After public void afterReferencesAnalysisTest() throws Exception { project.dispose(); }
 	
 	@Test
