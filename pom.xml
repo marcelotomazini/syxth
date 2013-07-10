@@ -24,6 +24,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<tycho-version>0.16.0</tycho-version>
 	</properties>
+	
+	<scm>
+		<connection>scm:git:git@github.com:marcelotomazini/syxth.git</connection>
+		<url>git@github.com:marcelotomazini/syxth.git</url>
+		<tag>HEAD</tag>
+	</scm>
 
 	<build>
 		<pluginManagement>
@@ -50,10 +56,6 @@
 						<configuration>
 							<artifacts>
 								<artifact>
-									<id>org.mockito:mockito-all:1.9.5</id>
-									<source>true</source>
-								</artifact>
-								<artifact>
 									<id>org.eclipse.jgit:org.eclipse.jgit:2.3.1.201302201838-r</id>
 									<source>true</source>
 								</artifact>
@@ -78,6 +80,12 @@
 						<contextPath>/site</contextPath>
 					</webApp>
 				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.4.1</version>
 			</plugin>
 
 		</plugins>
@@ -122,14 +130,6 @@
 					<exists>${basedir}/../target/repository</exists>
 				</file>
 			</activation>
-		
-			<repositories>
-				<repository>
-					<id>mockito-p2</id>
-					<layout>p2</layout>
-					<url>file:///${basedir}/../target/repository</url>
-				</repository>
-			</repositories>
 		</profile>
 	</profiles>
 
