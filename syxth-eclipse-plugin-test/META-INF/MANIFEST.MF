@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: syxth-eclipse-plugin-test;singleton:=true
-Bundle-Version: 0.0.1.qualifier
+Bundle-Version: 0.0.3
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: Objective Solutions
 Bundle-Name: syxth-eclipse-plugin-test
@@ -17,5 +17,5 @@ Require-Bundle: org.junit4;bundle-version="4.8",
  org.eclipse.m2e.core;bundle-version="1.0.0",
  org.eclipse.m2e.model.edit;bundle-version="1.0.0",
  org.eclipse.search,
- syxth-eclipse-plugin;bundle-version="0.0.1"
+ syxth-eclipse-plugin;bundle-version="0.0.3"
 Bundle-ActivationPolicy: lazy

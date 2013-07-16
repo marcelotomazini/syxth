@@ -26,46 +26,45 @@ import org.eclipse.search.ui.text.Match;
 import org.syxth.queries.DeadCodeJavaSearchQuery;
 import org.syxth.queries.DeadCodeSearchQueryProvider;
 
-
 @SuppressWarnings("restriction")
 public class ReferencesAnalyser {
 
 	public ReferencesAnalyser(IJavaElement javaElement) {
 		this.subject = javaElement;
 	}
-	
+
 	public void analyse(IProgressMonitor monitor) {
-			try {
-				searchMethodsToAnalyse();
-	
-				runQueries(monitor);
-				selectMethodsByQuantityOfReferences(0);
-				
-				Map<ISearchQuery, IMethod> otherMap = new HashMap<ISearchQuery, IMethod>(queries);
-				queries.clear();
-				for(Map.Entry<ISearchQuery, IMethod> entry : otherMap.entrySet()) {
-					String searchForRegex = "(\\W|^)" + entry.getValue().getElementName() + "(\\W|$)";
-					queries.put(provider.createQuery(searchForRegex), entry.getValue());
-				}
-				
-				runQueries(monitor);
-				removeResultsInComments();
-				selectMethodsByQuantityOfReferences(1);
-			} catch (CoreException e) {
-				throw new RuntimeException(e);
+		try {
+			searchMethodsToAnalyse();
+
+			runQueries(monitor);
+			selectMethodsByQuantityOfReferences(0);
+
+			Map<ISearchQuery, IMethod> otherMap = new HashMap<ISearchQuery, IMethod>(queries);
+			queries.clear();
+			for (Map.Entry<ISearchQuery, IMethod> entry : otherMap.entrySet()) {
+				String searchForRegex = "(\\W|^)" + entry.getValue().getElementName() + "(\\W|$)";
+				queries.put(provider.createQuery(searchForRegex), entry.getValue());
 			}
+
+			runQueries(monitor);
+			removeResultsInComments();
+			selectMethodsByQuantityOfReferences(1);
+		} catch (CoreException e) {
+			throw new RuntimeException(e);
 		}
+	}
 
 	private void removeResultsInComments() {
-		for(ISearchQuery query : new HashSet<ISearchQuery>(queries.keySet())) {
+		for (ISearchQuery query : new HashSet<ISearchQuery>(queries.keySet())) {
 			Pattern slashStarComment = Pattern.compile(".*/\\*.*" + queries.get(query).getElementName() + ".*\\*/.*");
 			Pattern doubleSlashComment = Pattern.compile(".*//.*" + queries.get(query).getElementName() + ".*");
-			
+
 			AbstractTextSearchResult searchResult = (AbstractTextSearchResult) query.getSearchResult();
-			for(Object element : searchResult.getElements())
-				for(Match match : searchResult.getMatches(element)) {
-					String contents = ((FileMatch)match).getLineElement().getContents();
-					if(slashStarComment.matcher(contents).matches() || doubleSlashComment.matcher(contents).matches() || contents.trim().startsWith("*"))
+			for (Object element : searchResult.getElements())
+				for (Match match : searchResult.getMatches(element)) {
+					String contents = ((FileMatch) match).getLineElement().getContents();
+					if (slashStarComment.matcher(contents).matches() || doubleSlashComment.matcher(contents).matches() || contents.trim().startsWith("*"))
 						searchResult.removeMatch(match);
 				}
 		}
@@ -85,37 +84,37 @@ public class ReferencesAnalyser {
 	}
 
 	private void searchMethodsToAnalyse() throws CoreException {
-		for(IMethod method : searchMethodsToAnalyse(subject))
+		for (IMethod method : searchMethodsToAnalyse(subject))
 			queries.put(new DeadCodeJavaSearchQuery(method), method);
 	}
-	
+
 	private List<IMethod> searchMethodsToAnalyse(IJavaElement javaElement) throws CoreException {
 		List<IMethod> matches = new ArrayList<IMethod>();
 		try {
 			if (javaElement instanceof IJavaProject || javaElement instanceof IPackageFragmentRoot)
-				matches = searchMethodsToAnalyse((IParent)javaElement);
+				matches = searchMethodsToAnalyse((IParent) javaElement);
 			if (javaElement instanceof IPackageFragment)
-				matches = searchMethodsToAnalyse((IPackageFragment)javaElement);
+				matches = searchMethodsToAnalyse((IPackageFragment) javaElement);
 			if (javaElement instanceof ICompilationUnit)
-				matches = searchMethodsToAnalyse((ICompilationUnit)javaElement);
+				matches = searchMethodsToAnalyse((ICompilationUnit) javaElement);
 		} catch (JavaModelException e) {
 			throw new RuntimeException(e);
 		}
 		return matches;
 	}
-	
+
 	private List<IMethod> searchMethodsToAnalyse(ICompilationUnit compilationUnit) throws CoreException {
 		List<IMethod> matches = new ArrayList<IMethod>();
 		IType type = compilationUnit.getAllTypes()[0];
-		for (IMethod method : type.getMethods()) { 
+		for (IMethod method : type.getMethods()) {
 			if (ExclusionPatterns.ignoreMethod(method))
 				continue;
-			
+
 			matches.add(method);
 		}
 		return matches;
 	}
-	
+
 	private List<IMethod> searchMethodsToAnalyse(IParent parent) throws CoreException {
 		List<IMethod> matches = new ArrayList<IMethod>();
 		for (IJavaElement javaElement : parent.getChildren())
@@ -129,23 +128,23 @@ public class ReferencesAnalyser {
 		for (IPackageFragment subPackage : withSubpackages(packageFragment))
 			for (ICompilationUnit compilationUnit : subPackage.getCompilationUnits())
 				matches.addAll(searchMethodsToAnalyse(compilationUnit));
-		
+
 		return matches;
 	}
 
 	private List<IPackageFragment> withSubpackages(IPackageFragment packge) throws JavaModelException {
-		IJavaElement[] allPackages = ((IPackageFragmentRoot)packge.getParent()).getChildren();
+		IJavaElement[] allPackages = ((IPackageFragmentRoot) packge.getParent()).getChildren();
 		List<IPackageFragment> ret = new ArrayList<IPackageFragment>();
 		for (IJavaElement candidate : allPackages)
 			if (candidate.getElementName().startsWith(packge.getElementName()))
-				ret.add((IPackageFragment)candidate);
-		
+				ret.add((IPackageFragment) candidate);
+
 		return ret;
 	}
 
 	private void selectMethodsByQuantityOfReferences(int quantity) {
-		for(ISearchQuery query : new HashSet<ISearchQuery>(queries.keySet()))
-			if(((AbstractTextSearchResult) query.getSearchResult()).getMatchCount() > quantity)
+		for (ISearchQuery query : new HashSet<ISearchQuery>(queries.keySet()))
+			if (((AbstractTextSearchResult) query.getSearchResult()).getMatchCount() > quantity)
 				queries.remove(query);
 	}
 
@@ -153,7 +152,7 @@ public class ReferencesAnalyser {
 		for (ISearchQuery query : queries.keySet())
 			query.run(monitor);
 	}
-	
+
 	private final IJavaElement subject;
 	private final DeadCodeSearchQueryProvider provider = new DeadCodeSearchQueryProvider();
 	private final Map<ISearchQuery, IMethod> queries = new HashMap<ISearchQuery, IMethod>();

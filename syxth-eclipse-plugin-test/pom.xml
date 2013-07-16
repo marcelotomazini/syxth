@@ -4,12 +4,12 @@
 	<parent>
 		<groupId>objective</groupId>
 		<artifactId>syxth</artifactId>
-		<version>0.0.2-SNAPSHOT</version>
+		<version>0.0.3</version>
 	</parent>
 
 	<artifactId>syxth-eclipse-plugin-test</artifactId>
 	<packaging>eclipse-test-plugin</packaging>
-
+	
 	<build>
 		<plugins>
 			<plugin>
