@@ -2,7 +2,7 @@
 <site>
    <category-def name="syxth_category" label="Syxth"/>
    
-   <feature url="features/syxth-eclipse-plugin-feature_0.0.3.jar" id="syxth-eclipse-plugin-feature" versio="0.0.3">
+   <feature url="features/syxth-eclipse-plugin-feature_0.0.4.jar" id="syxth-eclipse-plugin-feature" versio="0.0.4">
       <category name="syxth_category"/>
    </feature>
 </site>
