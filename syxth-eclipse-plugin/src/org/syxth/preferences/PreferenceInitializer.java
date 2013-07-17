@@ -1,5 +1,7 @@
 package org.syxth.preferences;
 
+
+
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.syxth.SyxthPlugin;
